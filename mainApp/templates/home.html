@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap" rel="stylesheet">
+
+</head>
+
+
+
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-8">
+				{% csrf_token %}
+            <form id="detailsForm" method="post" action="/add_data">
+				{% csrf_token %}
+
+                <h1 id="register"><b>Activity Submission</b></h1>
+
+                <br><br>
+                <div class="tab">
+                    <h4>Name of the Activity</h4>
+                    <p>
+                        <input placeholder="Orientation" oninput="this.className = ''" name="name">
+                    </p>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="tab">
+                            <h6>Date of the Event</h6>
+                            <input type="date" placeholder="DD/MM/YYYY" oninput="this.className = ''" name="event_date">
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="tab">
+                            <h6>Date of the Entry</h6>
+                            <input type="date" placeholder="DD/MM/YYYY" oninput="this.className = ''" name="entry_date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab">
+                    <h6>Organizing Department</h6>
+                    <p><input placeholder="CSE/IT..." oninput="this.className = ''" name="department"></p>
+                </div>
+
+                <div class="tab">
+                    <h6>Number of Attendees</h6>
+                    <p><input placeholder="123..." oninput="this.className = ''" name="attendees"></p>
+                </div>
+
+
+                <div class="tab">
+                    <h6>Link of the Report</h6>
+                    <p><input placeholder="https..." oninput="this.className = ''" name="link"></p>
+                </div>
+                <div class="tab">
+                    <h6>Entry Done by (email)</by>
+                    </h6>
+                    <p><input type="email" placeholder="abc@gmail.com" oninput="this.className = ''" name="email">
+                    </p>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    body {
+        /* background-image: url("img/form2.jpg"); */
+
+
+        font-family: 'Montserrat', sans-serif;
+        background-repeat: no-repeat;
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #regForm {
+        background-color: #ffffff;
+        margin: 0px auto;
+        font-family: 'Montserrat', sans-serif;
+        padding: 40px;
+        border-radius: 10px
+    }
+
+    #register {
+
+        color: #e87911;
+    }
+
+    h1 {
+        text-align: center
+    }
+
+    input {
+        padding: 10px;
+        width: 100%;
+        font-size: 20px;
+        font-family: 'Montserrat', sans-serif;
+        border: 1px solid #aaaaaa;
+        border-radius: 15px;
+
+    }
+
+
+    .all-steps {
+
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .step {
+        height: 50px;
+        width: 50px;
+        margin: 0 6px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        color: #e87911;
+        opacity: 0.5;
+    }
+
+    .step.active {
+        opacity: 1
+    }
+
+
+    .step.finish {
+        color: #fff;
+        background: #e87911;
+        opacity: 1;
+
+    }
+
+
+
+    .all-steps {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px
+    }
+
+    .thanks-message {
+        display: none
+    }
+</style>
+
+
+<script>
+const form = document.getElementById('detailsForm')
+
+form.addEventListener('submit', (e) => {
+
+    const formData = new formData(form);
+
+    fetch('/add-data', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    })
+});
+
+</script>
